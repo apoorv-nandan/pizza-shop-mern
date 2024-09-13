@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BACKEND_URL } from '../constants';
 // import { clearCart } from './cartActions';
 
 export const placeOrder =(total) => async (dispatch,getState) => {
@@ -9,7 +10,7 @@ export const placeOrder =(total) => async (dispatch,getState) => {
     const date = new Date().toLocaleDateString();
     // console.log(JSON.stringify({user,cartItems,total}));
     try{
-        const res= await axios.post('/api/orders/placeOrder',{user,total,cartItems});
+        const res= await axios.post(`${BACKEND_URL}/api/orders/placeOrder`,{user,total,cartItems});
         console.log(res);
         dispatch({type:'ADD_ORDER_SUCCESS',payload:cartItems});
         // dispatch(clearCart());
@@ -26,7 +27,7 @@ export const placeOrder =(total) => async (dispatch,getState) => {
 export const getOrders = (userid) => async dispatch =>{
     dispatch({type:'GET_ORDERS'});
     try{
-        const res= await axios.post('/api/orders/getOrders',{userid});
+        const res= await axios.post(`${BACKEND_URL}/api/orders/getOrders`,{userid});
         console.log(res.data);
         dispatch({type:'GET_ORDERS_SUCCESS', payload : res.data});
     }
