@@ -13,9 +13,17 @@ function Login (){
     const {loading, error} = useSelector(state =>state.loginReducer);
 
     const handleLogin = () =>{
-        const user={email, password};
+        var em; 
+        const logger=Number(email);
+        if(!Number.isNaN(logger))
+            em=false;  //phnumber
+        else{
+            em=true;   //email
+        }
+        const user={email, password,em};
         console.log(user);
-        dispatch(loginUser(user));
+        dispatch(loginUser(user));  
+        
     }
 
     useEffect(() => {
@@ -32,7 +40,7 @@ function Login (){
                     {error && <Error error='Invalid Credentials'/>}
 
                     <h2 style={{marginBottom:'30px'}}>Login</h2>
-                    <input type='text' placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control"/>
+                    <input type='text' placeholder="phone or email" value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control"/>
                     <input type='password' placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="form-control"/>
                     <button className="btn" onClick={handleLogin}>Login</button>
                     <Link to='/register'><p>Click here to register</p></Link>

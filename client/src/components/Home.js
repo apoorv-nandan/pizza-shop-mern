@@ -22,9 +22,9 @@ function Home(){
         dispatch(getAllPizza());
     },[]);
 
-
+    //current user shouldn't be null or undefined
     useEffect(()=>{
-        if(currentUser!== null)
+        if(currentUser)
         dispatch(getOrders(currentUser._id));
     },[currentUser])
 

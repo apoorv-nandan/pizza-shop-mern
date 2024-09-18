@@ -11,6 +11,7 @@ function Register (){
     const dispatch= useDispatch();
     const [name,setName]= useState("");
     const [email,setEmail]= useState("");
+    const [phnumber,setPhoneNumber] =useState("");
     const [password,setPassword]= useState("");
     const [cpassword,setCPassword]= useState("");
 
@@ -21,7 +22,7 @@ function Register (){
             alert("passwords don't match");
         }
         else{
-            const user={name, email, password};
+            const user={name, email,phnumber, password};
             console.log(user);
             dispatch(registerUser(user));
         }
@@ -39,8 +40,9 @@ function Register (){
                     <h3 style={{marginBottom:'30px'}}>Register <BsPersonFillAdd /></h3>
                     <input type='text' placeholder="name" value={name} onChange={(e)=>setName(e.target.value)} className="form-control"/>
                     <input type='text' placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control"/>
-                    <input type='text' placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="form-control"/>
-                    <input type='text' placeholder="confirm password" value={cpassword} onChange={(e)=>setCPassword(e.target.value)} className="form-control"/>
+                    <input type='text' placeholder="phone number" value={phnumber} onChange={(e)=>setPhoneNumber(e.target.value)} className="form-control"/>
+                    <input type='password' placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="form-control"/>
+                    <input type='password' placeholder="confirm password" value={cpassword} onChange={(e)=>setCPassword(e.target.value)} className="form-control"/>
                     <button onClick={handleSubmit} className="btn">Register</button>
                     <Link to='/login'><p>Already have an account</p></Link>
                 </div>
