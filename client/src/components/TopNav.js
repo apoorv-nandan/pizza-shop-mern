@@ -11,6 +11,8 @@ function TopNav(){
     const userstate = useSelector(state => state.loginReducer);
     const {currentUser} = userstate;
 
+    console.log(currentUser);
+
     return(
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
@@ -26,7 +28,7 @@ function TopNav(){
                         Orders
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={()=>{dispatch(logoutUser())}}>
+                    <NavDropdown.Item onClick={()=> dispatch(logoutUser())}>
                        LogOut
                     </NavDropdown.Item>
                     </NavDropdown>)

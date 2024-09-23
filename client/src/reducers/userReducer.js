@@ -33,6 +33,9 @@ export const loginReducer = (state={},action) =>{
             loading:false,
             error:action.payload
         }
+        case 'USER_LOGOUT':return{
+            currentUser:action.payload
+        } 
         default : return state
     }
 }

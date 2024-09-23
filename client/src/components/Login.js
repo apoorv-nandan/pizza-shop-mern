@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Error from "../helpers/error";
@@ -8,6 +8,7 @@ import Loading from "../helpers/loading";
 function Login (){
     
     const dispatch= useDispatch();
+    const navigate = useNavigate();
     const [email,setEmail]= useState("");
     const [password,setPassword]= useState("");
     const {loading, error} = useSelector(state =>state.loginReducer);
@@ -22,14 +23,10 @@ function Login (){
         }
         const user={email, password,em};
         console.log(user);
-        dispatch(loginUser(user));  
-        
+        dispatch(loginUser(user));
+        navigate('/');  
     }
 
-    useEffect(() => {
-        if(localStorage.getItem('currentUser'))
-        window.location.href='/';
-    },[])
 
     return(
         <div>

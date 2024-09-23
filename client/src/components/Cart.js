@@ -9,6 +9,7 @@ import Succes from '../helpers/success';
 
 function Cart() {
     const cartstate = useSelector(state => state.cartReducer);
+    const {currentUser} = useSelector(state => state.loginReducer);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [coupon,setCoupon] = useState('');
@@ -41,12 +42,17 @@ function Cart() {
     }
 
     const placeorder= () => {
+        if(currentUser === null){
+            navigate('/login');
+        }
+        else{
         dispatch(placeOrder(Math.round(total)));
         setPlaced(true);
         setTimeout(()=>{
             dispatch(clearCart());
             navigate('/orders');
         },3000);
+    }
     }
 
     return (
