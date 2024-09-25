@@ -11,8 +11,6 @@ function TopNav(){
     const userstate = useSelector(state => state.loginReducer);
     const {currentUser} = userstate;
 
-    console.log(currentUser);
-
     return(
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">

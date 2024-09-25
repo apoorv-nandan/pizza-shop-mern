@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { registerUser } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import Loading from "../helpers/loading";
 
 function Register (){
     const dispatch= useDispatch();
+    const navigate= useNavigate();
     const [name,setName]= useState("");
     const [email,setEmail]= useState("");
     const [phnumber,setPhoneNumber] =useState("");
@@ -17,14 +18,20 @@ function Register (){
 
     const {loading,success,error} = useSelector(state => state.userReducer);
 
-    const handleSubmit = () =>{
+    const handleSubmit = async () =>{
         if(password !== cpassword){
             alert("passwords don't match");
         }
         else{
             const user={name, email,phnumber, password};
             console.log(user);
-            dispatch(registerUser(user));
+            try{
+                await dispatch(registerUser(user));
+                navigate('/login') 
+            }
+            catch(error){
+                console.log('register error',error);
+            }
         }
     }
 

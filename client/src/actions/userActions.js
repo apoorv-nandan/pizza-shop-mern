@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { BACKEND_URL } from '../constants';
+import Cookies from 'js-cookie'
+
 axios.defaults.withCredentials=true;
 
 export const registerUser= (user) => async dispatch => {
@@ -12,7 +14,7 @@ export const registerUser= (user) => async dispatch => {
     }
     catch(error){
         dispatch({type:'USER_REGISTER_ERROR',payload:error});
-
+        throw error;
     }
 }
 
@@ -28,9 +30,9 @@ export const loginUser= (user) => async dispatch => {
         // navigate('/');
     }
     catch(error){
-        console.log(error)
+        console.log("*",error)
         dispatch({type:'USER_LOGIN_ERROR',payload:error});
-
+        throw error;
     }
     
 }
@@ -38,5 +40,6 @@ export const loginUser= (user) => async dispatch => {
 export const logoutUser= () => async dispatch => {
         dispatch({type:'USER_LOGOUT',payload:null});
         localStorage.removeItem('currUser');
+        Cookies.remove('token');
         // window.location.href='/login';
 }

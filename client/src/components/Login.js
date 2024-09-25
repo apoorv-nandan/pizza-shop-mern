@@ -13,7 +13,7 @@ function Login (){
     const [password,setPassword]= useState("");
     const {loading, error} = useSelector(state =>state.loginReducer);
 
-    const handleLogin = () =>{
+    const handleLogin = async () =>{
         var em; 
         const logger=Number(email);
         if(!Number.isNaN(logger))
@@ -23,8 +23,14 @@ function Login (){
         }
         const user={email, password,em};
         console.log(user);
-        dispatch(loginUser(user));
-        navigate('/');  
+        try{
+            await dispatch(loginUser(user));
+            navigate('/');
+        }
+        catch(error){
+            console.log(error);
+        }
+          
     }
 
 
